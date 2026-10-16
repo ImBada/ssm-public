@@ -39,6 +39,11 @@
   .date{position:relative;margin-top:18px;font-family:var(--h);font-weight:700;font-size:clamp(36px,calc(7.4 * var(--u)),84px);line-height:1;
     text-shadow:3px 0 0 var(--r),6px 0 0 var(--b)}
   .date span{display:inline-block;margin:0 .22em}
+  /* 행사 시작 타이머 */
+  .timer{position:relative;margin-top:40px;font-family:var(--h);font-weight:700}
+  .timer .l{font-size:12px;color:var(--dim);line-height:1.4}
+  .timer .t{margin-top:8px;font-size:48px;line-height:1;color:var(--y);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .timer .t small{font-size:24px;margin:0 .35em 0 .1em}
   .btns{position:relative;display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:44px}
   .watch{display:inline-block;font-family:var(--h);font-weight:700;font-size:12px;color:#000;background:var(--y);padding:14px 30px;border:2px solid var(--y)}
   .watch:hover{background:#fff;border-color:#fff}
@@ -118,6 +123,8 @@
 
   @media (max-width:820px){
     .hud{font-size:18px}
+    .timer .t{font-size:36px}
+    .timer .t small{font-size:18px}
     .hero{padding-bottom:80px}
     .block{grid-template-columns:1fr;gap:24px;padding:64px 0}
     .credits{padding-top:64px}
@@ -149,6 +156,10 @@
     </div>
     <img class="ko" src="assets/title-ko.svg" alt="슈퍼 스피드런 마라톤 2027">
     <div class="date">2027. 01. 21<span>-</span>24</div>
+    <div class="timer" id="timer">
+      <div class="l" id="timerLabel">행사 시작까지 남은 시간</div>
+      <div class="t" id="timerValue">&nbsp;</div>
+    </div>
     <div class="btns">
       <a class="watch" data-href="liveUrl" target="_blank" rel="noopener">방송 보기</a>
       <a class="watch sub" data-href="discordUrl" target="_blank" rel="noopener">Discord 서버</a>
@@ -268,6 +279,9 @@ const CONFIG = {
   xUrl:       'https://twitter.com/SuperSpeedrun',
   discordUrl: 'https://discord.com/invite/CBzbavdev3',
   badaUrl:    'https://badagames.net/',
+  // 행사 시작 (한국시간). 시작 후에는 스피드런 타이머처럼 경과 시간을 표시하고, 종료 시각이 지나면 숨김
+  eventStart: '2027-01-21T10:30:00+09:00',
+  eventEnd:   '2027-01-25T00:00:00+09:00',
   archive: [
     ['SSM 2021', 'https://www.superspeedrun.com/복제-메인'],
     ['SSM 2022', 'https://www.superspeedrun.com/home'],
@@ -280,6 +294,29 @@ const CONFIG = {
 /* ==================== */
 
 document.querySelectorAll('[data-href]').forEach(a => a.href = CONFIG[a.dataset.href]);
+
+/* 행사 시작 타이머 */
+(() => {
+  const start = +new Date(CONFIG.eventStart), end = +new Date(CONFIG.eventEnd);
+  const box = document.getElementById('timer'), label = document.getElementById('timerLabel'), value = document.getElementById('timerValue');
+  const pad = n => String(n).padStart(2, '0');
+  const hms = sec => `${pad(Math.floor(sec / 3600) % 24)}:${pad(Math.floor(sec / 60) % 60)}:${pad(sec % 60)}`;
+  function tick() {
+    const now = Date.now();
+    if (now < start) {
+      const sec = Math.ceil((start - now) / 1000);
+      value.innerHTML = `${Math.floor(sec / 86400)}<small>일</small>${hms(sec)}`;
+    } else if (now < end) {
+      const sec = Math.floor((now - start) / 1000);
+      label.textContent = 'LIVE ON';
+      value.textContent = `${pad(Math.floor(sec / 3600))}:${pad(Math.floor(sec / 60) % 60)}:${pad(sec % 60)}`;
+    } else {
+      box.style.visibility = 'hidden';   // 높이는 유지해서 Wix 임베드 높이가 바뀌지 않게
+    }
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
 document.getElementById('years').innerHTML =
   CONFIG.archive.map(([n,u]) => `<a href="${u}" target="_top">${n}</a>`).join('');
 </script>
