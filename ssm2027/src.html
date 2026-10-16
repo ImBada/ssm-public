@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>홈 | SUPER SPEEDRUN</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<style>
+  :root{
+    --bg:#000; --ink:#f2f2ee; --dim:#8b8b86; --line:#2a2a2a;
+    --y:#ffef00; --r:#eb3728; --b:#0087c9;
+    --girder:#b8384a; --ladder:#3b5bdb;
+    --h:'Galmuri11',monospace;
+    --t:'Galmuri14','Galmuri11',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--t);font-size:15px;line-height:1.85;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{width:min(1180px,90%);margin:0 auto}
+  h2,h3,.hfont{font-family:var(--h);font-weight:700}
+
+
+  /* 포스터 HUD 줄 */
+  .hud{display:grid;grid-template-columns:1fr 1fr 1fr;padding-top:48px;font-family:var(--h);font-weight:700;font-size:24px;line-height:1.2}
+  .hud div:nth-child(2){text-align:center}
+  .hud div:nth-child(3){text-align:right}
+
+  /* 히어로 */
+  .hero{position:relative;text-align:center;padding:40px 0 110px}
+  .hero .emblem{position:absolute;left:50%;top:0;width:min(720px,100%);transform:translateX(-50%);opacity:.32;pointer-events:none}
+  .hero .logo{position:relative;width:min(620px,88%);margin:0 auto}
+  .hero .ko{position:relative;width:min(430px,76%);margin:56px auto 0}
+  .date{position:relative;margin-top:18px;font-family:var(--h);font-weight:700;font-size:clamp(36px,7.4vw,84px);line-height:1;
+    text-shadow:3px 0 0 var(--r),6px 0 0 var(--b)}
+  .date span{display:inline-block;margin:0 .22em}
+  .watch{position:relative;display:inline-block;margin-top:44px;font-family:var(--h);font-weight:700;font-size:12px;color:#000;background:var(--y);padding:14px 30px}
+  .watch:hover{background:#fff}
+
+  /* 총 모금액 */
+  .total{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .total .l{font-family:var(--h);font-size:12px;color:var(--dim);margin-bottom:10px}
+  .total .n{font-family:var(--h);font-weight:700;font-size:clamp(36px,6.4vw,72px);line-height:1;color:var(--y);font-variant-numeric:tabular-nums}
+  .total .btn{font-family:var(--h);font-weight:700;font-size:12px;background:var(--y);color:#000;padding:12px 22px}
+  .total .btn:hover{background:#fff}
+
+  /* 본문 블록 */
+  .block{display:grid;grid-template-columns:1fr 2fr;gap:72px;padding:90px 0;border-top:1px solid var(--line)}
+  .block:first-of-type{border-top:none}
+  .block h2{font-size:24px;line-height:1.4}
+  .block p{color:#d2d2cc}
+  .block p+p{margin-top:18px}
+  .block b{color:var(--y);font-weight:400}
+  .block .fine{color:var(--dim);font-size:15px}
+  .block a.u{border-bottom:1px solid #555}
+  .block a.u:hover{color:var(--y);border-color:var(--y)}
+
+  /* 크레딧: 포스터 하단 구조 */
+  .credits{position:relative;padding:110px 0 30px}
+  .tier{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding:0 6% 22px;min-height:120px}
+  .tier.center{justify-content:center}
+  .girder{position:relative;height:16px;margin:0 2%;
+    background:
+      repeating-linear-gradient(90deg,var(--girder) 0 9px,transparent 9px 15px) 0 0/100% 5px no-repeat,
+      repeating-linear-gradient(90deg,var(--girder) 0 9px,transparent 9px 15px) 7px 11px/100% 5px no-repeat}
+  .girder.a{transform:rotate(.6deg)}
+  .girder.b{transform:rotate(-.9deg);margin-left:8%}
+  .girder.c{transform:rotate(-.5deg);margin-right:8%}
+  .ladder{position:absolute;width:64px;top:-6px;height:calc(100% + 6px);
+    background:
+      repeating-linear-gradient(0deg,var(--ladder) 0 5px,transparent 5px 9px) 0 0/5px 100% no-repeat,
+      repeating-linear-gradient(0deg,var(--ladder) 0 5px,transparent 5px 9px) 100% 0/5px 100% no-repeat,
+      repeating-linear-gradient(0deg,transparent 0 22px,var(--ladder) 22px 27px) 50% 0/calc(100% - 18px) 100% no-repeat;
+    -webkit-mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 9px);
+            mask:repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 9px)}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .item .k{font-family:var(--h);font-weight:700;font-size:12px;line-height:1.3}
+  .item .k small{display:block;font-size:12px;color:var(--dim);font-weight:400}
+  .item .v{font-family:var(--h);font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.15}
+  .item .s{font-family:var(--h);font-size:12px;color:var(--dim);margin-top:8px;line-height:1.6}
+  .item a.v:hover{color:var(--y)}
+  .logo-img{display:block;height:auto}
+  .logo-img.atm{width:clamp(220px,24vw,300px)}
+  .logo-img.chz{width:clamp(150px,18vw,220px)}
+  .logo-img.bada{width:clamp(150px,16vw,200px)}
+  .logo-img.maw{width:clamp(200px,22vw,260px)}
+  a:hover>.logo-img{opacity:.75}
+
+
+  /* 문의 */
+  .mail{display:inline-block;margin:6px 0;font-family:var(--h);font-weight:700;font-size:clamp(24px,3.2vw,36px);color:var(--y);word-break:break-all}
+  .mail:hover{color:#fff}
+
+  /* 지난 행사 */
+  .years{display:flex;flex-wrap:wrap;gap:12px 40px;padding:80px 0 96px;border-top:1px solid var(--line)}
+  .years a{font-family:var(--h);font-weight:700;font-size:clamp(24px,3.4vw,36px);line-height:1.2;color:#555;transition:color .15s}
+  .years a:hover{color:var(--ink)}
+
+
+  @media (max-width:820px){
+    .hud{font-size:18px}
+    .hero{padding-bottom:80px}
+    .block{grid-template-columns:1fr;gap:24px;padding:64px 0}
+    .credits{padding-top:64px}
+    .tier,.tier.center{flex-direction:column;align-items:flex-start;gap:28px;padding:0 0 26px}
+    .ladder{display:none}
+    .girder{margin:0 0 30px!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hud">
+    <div>Estimate<br>75:00</div>
+    <div>Season<br>Winter</div>
+    <div>Goal<br>10M WON</div>
+  </div>
+
+  <section class="hero">
+    <img class="emblem" src="assets/emblem.svg" alt="">
+    <img class="logo" src="assets/logo.svg" alt="SUPER SPEEDRUN MARATHON 2027">
+    <img class="ko" src="assets/title-ko.svg" alt="슈퍼 스피드런 마라톤 2027">
+    <div class="date">2027. 01. 21<span>-</span>24</div>
+    <a class="watch" data-href="liveUrl" target="_blank" rel="noopener">방송 보기</a>
+  </section>
+
+  <div class="total">
+    <div>
+      <div class="l">2021년부터 2026년까지 총 모금액</div>
+      <div class="n">105,469,000원</div>
+    </div>
+    <a class="btn" data-href="donateUrl" target="_top">기부</a>
+  </div>
+
+  <section class="block">
+    <h2>SUPER SPEEDRUN MARATHON<br>슈퍼 스피드런 마라톤</h2>
+    <div>
+      <p>SUPER SPEEDRUN MARATHON (슈퍼 스피드런 마라톤)은 3~4일간 밤새도록 진행되는 스피드런 자선 행사입니다.</p>
+      <p><b>스피드런</b>이란 게임을 처음부터 플레이해서 얼마나 빨리 클리어할 수 있을까를 겨루는 플레이 방식입니다. SSM는 그런 스피드런을 하는 사람들이 모여 각자 다양한 게임을 플레이하며 그것을 방송하고, 후원금을 모아 기부 단체에 보내는 행사입니다.</p>
+      <p>2021년부터 매년 개최 중인 슈퍼스피드런은 총 모금액 105,469,000원을 달성하였습니다.<br>모금한 금액은 전액 메이크어위시코리아로 전달되었습니다.</p>
+    </div>
+  </section>
+
+  <section class="credits">
+    <div class="tier">
+      <div class="item">
+        <div class="k">장소<small>Venue</small></div>
+        <div><img class="logo-img atm" src="assets/allthatmind.svg" alt="All That Mind 복합문화공간 올댓마인드"><div class="s">서울특별시 영등포구 문래동6가 문래로 55</div></div>
+      </div>
+      <div class="item">
+        <div class="k">방송<small>Live on</small></div>
+        <div><a data-href="liveUrl" target="_blank" rel="noopener"><img class="logo-img chz" src="assets/chzzk.svg" alt="치지직"></a></div>
+      </div>
+    </div>
+    <div class="girder a"></div>
+
+    <div class="tier center">
+      <span class="ladder" style="left:22%"></span>
+      <div class="item">
+        <div class="k">협력<small>Partner</small></div>
+        <div><img class="logo-img maw" src="assets/maw.png" alt="Make-A-Wish KOREA"></div>
+      </div>
+      <span class="ladder" style="right:18%"></span>
+    </div>
+    <div class="girder b"></div>
+
+    <div class="tier">
+      <span class="ladder" style="left:58%"></span>
+      <div class="item">
+        <div class="k">후원<small>Sponsors</small></div>
+        <div><div class="v">Coming Soon</div></div>
+      </div>
+      <div class="item">
+        <div class="k">제작<small>Production</small></div>
+        <div><a data-href="badaUrl" target="_blank" rel="noopener"><img class="logo-img bada" src="assets/bada.png" alt="BADA GAMES"></a></div>
+      </div>
+    </div>
+    <div class="girder c"></div>
+  </section>
+
+  <section class="block" style="border-top:none">
+    <h2>슈퍼 스피드런의 목표</h2>
+    <div>
+      <p>SUPER SPEEDRUN MARATHON은 스피드런의 발전과 촉진을 도모하기 위해 개최합니다. 또한 행사 기간 중에는 후원금을 모아 전액 기부단체로 전달합니다. SSM은 중간중간에 게임뿐만이 아닌 게임과 관련된 각종 문화 콘텐츠를 준비하여 다양한 방면으로 즐길 수 있는 행사를 만들고자 합니다.</p>
+      <p>SSM에서 모금된 모든 금액은 난치병으로 투병하는 아동들에게 소원 성취를 통해 삶의 희망, 용기, 기쁨을 전함으로 병과 싸워 이겨내는 기적을 만드는 "한국메이크어위시재단"에 전액 기부됩니다.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>기부 단체</h2>
+    <div>
+      <p><b>SSM 기간 중에 진행 되는 후원금은 전액 메이크어위시 코리아로 돌아갑니다.</b></p>
+      <p>메이크어위시는 난치병으로 투병하는 아동들에게 소원 성취를 통해 삶의 희망, 용기, 기쁨을 전함으로 병과 싸워 이겨내는 기적을 만드는 단체입니다. 메이크어위시는 1980년 미국 애리조나 주에서 백혈병으로 투병하던 일곱 살 크리스의 소원 성취를 계기로 탄생하여 전 세계 50개 국 39개 지부에서 50만 명 이상의 난치병 아동들의 소원을 이루어주는 세계 최대 소원 성취 전문기관이 되었습니다. 메이크어위시 코리아는 2002년 11월 세계에서 26번째로 설립되어 현재까지 5,000여 명의 난치병 아동들의 소원을 이루어 주었으며, 더 많은 난치병 아동들이 소원을 이룰 수 있도록 노력하고 있습니다.</p>
+      <p class="fine">다만, 치지직 채널 구독 및 슈퍼스피드런'마라톤'이 아닌 다른 행사 중에 이루어지는 후원은 행사 운영 비용에 사용됩니다. 자세한 정보는 <a class="u" data-href="discordUrl" target="_blank" rel="noopener">공식 디스코드 채널</a>에서 확인해주세요.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>방송 및 기록</h2>
+    <div>
+      <p>행사는 모든 내용을 <a class="u" data-href="youtubeUrl" target="_blank" rel="noopener">Youtube</a>로 언제든지 다시 시청할 수 있습니다. 행사가 완전히 끝나면 추후 게임 별로 다시보기가 업로드됩니다.</p>
+    </div>
+  </section>
+
+
+  <section class="block" id="contact">
+    <h2>문의하기</h2>
+    <div>
+      <p>협력, 스폰서, 언론 등 각종 문의는</p>
+      <a class="mail" href="mailto:ssm@badagames.com">ssm@badagames.com</a>
+      <p style="margin-top:0">으로 메일을 보내주세요.</p>
+      <p class="fine">담당자가 확인 후 빠른 시일 내로<br>답변드릴 수 있도록 하겠습니다.</p>
+    </div>
+  </section>
+
+  <div class="years" id="years"></div>
+</div>
+
+
+<script>
+/* ===== 링크 주소 ===== */
+const CONFIG = {
+  homeUrl:    'https://www.superspeedrun.com',
+  donateUrl:  'https://www.superspeedrun.com/donation',
+  rulesUrl:   'https://www.superspeedrun.com/행사-규정',
+  blogUrl:    'https://www.superspeedrun.com/blog',
+  liveUrl:    'https://chzzk.naver.com/e0e794139a00ce8179cb11e714a0e823',
+  youtubeUrl: 'https://www.youtube.com/@speedrun-marathon',
+  xUrl:       'https://twitter.com/SuperSpeedrun',
+  discordUrl: 'https://discord.com/invite/CBzbavdev3',
+  badaUrl:    'https://badagames.net/',
+  archive: [
+    ['SSM 2021', 'https://www.superspeedrun.com/복제-메인'],
+    ['SSM 2022', 'https://www.superspeedrun.com/home'],
+    ['SSM 2023', 'https://www.superspeedrun.com/복제-홈'],
+    ['SSM 2024', 'https://www.superspeedrun.com/복제-ssm-2022'],
+    ['SSM5',     'https://www.superspeedrun.com/copy-of-홈'],
+    ['SSML',     'https://www.superspeedrun.com/복제-홈-1'],
+  ],
+};
+/* ==================== */
+
+document.querySelectorAll('[data-href]').forEach(a => a.href = CONFIG[a.dataset.href]);
+document.getElementById('years').innerHTML =
+  CONFIG.archive.map(([n,u]) => `<a href="${u}" target="_top">${n}</a>`).join('');
+</script>
+</body>
+</html>
