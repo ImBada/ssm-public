@@ -176,7 +176,7 @@ clip-path:polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,10
 - 960px 이하에서만 모바일 레이아웃(본문 너비 90%)으로 바뀐다.
 - 임베드 안에서는 스크롤바를 만들지 않는다(`html,body{overflow:hidden}`). 내용이 임베드보다 길면 `.wrap` 전체를 `transform: scale()`로 축소해 맞춘다.
 - 상단 메뉴와 바닥글은 Wix에 이미 있으므로 넣지 않는다.
-- 이미지는 `build.py`로 HTML 안에 넣어 파일 하나로 만든다.
+- 이미지는 `build.py`가 GitHub 공개 저장소의 jsDelivr CDN 주소(커밋 해시 고정)로 바꾼다. 이미지를 바꿨으면 커밋·푸시한 뒤 빌드한다.
 
 ### 이미지 규격
 | 용도 | 크기 | 비고 |
