@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:2560px;height:1440px;background:#000;overflow:hidden}
+body{position:relative;font-family:'Galmuri11';font-weight:700;color:#f2f2ee}
+/* 모든 기기에서 보이는 안전 영역: 가운데 1546x423 */
+.safe{position:absolute;left:507px;top:508px;width:1546px;height:423px;display:flex;align-items:center;justify-content:center;gap:110px}
+.logo-wrap{position:relative;width:410px;flex:none}
+.emblem{position:absolute;left:50%;top:50%;width:116%;transform:translate(-63.7%,-50%)}
+.logo{position:relative;width:100%;display:block}
+.info{display:flex;flex-direction:column;align-items:flex-start}
+.hud{display:flex;gap:64px;font-size:36px;line-height:1.2}
+.ko{width:640px;display:block;margin-top:44px}
+.date{margin-top:26px;font-size:96px;line-height:1;text-shadow:5px 0 0 #eb3728,10px 0 0 #0087c9;white-space:nowrap}
+.date span{display:inline-block;margin:0 .2em}
+/* TV 등 전체 화면에서만 보이는 발판 */
+.girder{position:absolute;left:0;right:0;height:24px;
+  background:
+    repeating-linear-gradient(90deg,#b8384a 0 14px,transparent 14px 23px) 0 0/100% 8px no-repeat,
+    repeating-linear-gradient(90deg,#b8384a 0 14px,transparent 14px 23px) 11px 16px/100% 8px no-repeat}
+</style></head><body>
+<div class="girder" style="top:440px;transform:rotate(.4deg)"></div>
+<div class="girder" style="top:976px;transform:rotate(-.4deg)"></div>
+<div class="safe">
+  <div class="logo-wrap"><img class="emblem" src="../assets/emblem.svg"><img class="logo" src="../assets/logo.svg"></div>
+  <div class="info">
+    <div class="hud"><div>Estimate<br>75:00</div><div>Season<br>Winter</div><div>Goal<br>10M WON</div></div>
+    <img class="ko" src="../assets/title-ko.svg">
+    <div class="date">2027. 01. 21<span>-</span>24</div>
+  </div>
+</div>
+</body></html>
