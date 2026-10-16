@@ -14,11 +14,13 @@
     --t:'Galmuri14','Galmuri11',monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  /* Wix 임베드 안에서는 스크롤바를 만들지 않음. 내용이 임베드보다 길면 아래 fit()이 축소해서 맞춤 */
+  html,body{overflow:hidden}
   body{background:var(--bg);color:var(--ink);font-family:var(--t);font-size:15px;line-height:1.85;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
   /* 데스크톱은 너비 고정: 브라우저 폭이 달라져도 높이가 같아서 Wix 임베드 안에 스크롤이 안 생김 */
-  .wrap{width:920px;margin:0 auto}
+  .wrap{width:920px;margin:0 auto;transform-origin:50% 0}
   :root{--u:12.8px}
   @media (max-width:960px){.wrap{width:90%} :root{--u:1vw}}
   h2,h3,.hfont{font-family:var(--h);font-weight:700}
@@ -315,6 +317,22 @@ document.querySelectorAll('[data-href]').forEach(a => a.href = CONFIG[a.dataset.
     }
   }
   tick(); setInterval(tick, 1000);
+})();
+
+/* 임베드 높이 맞춤: 사용자 환경(브라우저 확대, 글꼴 크기 설정, 폰트 로딩 실패 등)으로
+   내용이 Wix 임베드 높이보다 길어지면, 이중 스크롤 대신 전체를 살짝 축소해 딱 맞춘다 */
+(() => {
+  const wrap = document.querySelector('.wrap');
+  function fit() {
+    const h = wrap.offsetHeight;            // transform 영향을 받지 않는 원래 높이
+    const s = Math.min(1, window.innerHeight / h);
+    wrap.style.transform = s < 1 ? `scale(${s})` : '';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (document.fonts) document.fonts.ready.then(fit);
+  new ResizeObserver(fit).observe(wrap);
+  fit();
 })();
 
 document.getElementById('years').innerHTML =
