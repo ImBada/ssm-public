@@ -323,10 +323,15 @@ document.querySelectorAll('[data-href]').forEach(a => a.href = CONFIG[a.dataset.
    내용이 Wix 임베드 높이보다 길어지면, 이중 스크롤 대신 전체를 살짝 축소해 딱 맞춘다 */
 (() => {
   const wrap = document.querySelector('.wrap');
+  const MIN_SCALE = 0.85;   // 이보다 더 줄여야 하면 임베드 높이 설정이 잘못된 것: 글자가 안 보이게 줄이지 말고 스크롤로 보여줌
   function fit() {
     const h = wrap.offsetHeight;            // transform 영향을 받지 않는 원래 높이
-    const s = Math.min(1, window.innerHeight / h);
-    wrap.style.transform = s < 1 ? `scale(${s})` : '';
+    const s = window.innerHeight / h;
+    const ok = s >= MIN_SCALE;
+    wrap.style.transform = ok && s < 1 ? `scale(${s})` : '';
+    document.documentElement.style.overflowY = ok ? 'hidden' : 'auto';
+    document.body.style.overflowY = ok ? 'hidden' : 'auto';
+    if (!ok) console.warn(`[SSM] 임베드 높이가 부족함: 현재 ${window.innerHeight}px, 필요 ${h}px (너비 ${window.innerWidth}px)`);
   }
   window.addEventListener('resize', fit);
   window.addEventListener('load', fit);
