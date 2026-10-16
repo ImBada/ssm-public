@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;background:#000;overflow:hidden}
+body{position:relative;font-family:'Galmuri11';font-weight:700;color:#f2f2ee}
+/* 디스코드 초대 배경: 가운데에 초대 카드가 겹쳐 나옴 → 가운데는 비우고 위·아래 모서리에 배치 */
+.hud{position:absolute;left:96px;right:96px;top:72px;display:grid;grid-template-columns:1fr 1fr 1fr;font-size:36px;line-height:1.2}
+.hud div:nth-child(2){text-align:center}.hud div:nth-child(3){text-align:right}
+.left{position:absolute;left:96px;bottom:120px}
+.ko{width:560px;display:block}
+.date{margin-top:28px;font-size:84px;line-height:1;text-shadow:4px 0 0 #eb3728,8px 0 0 #0087c9;white-space:nowrap}
+.date span{display:inline-block;margin:0 .18em}
+.logo-wrap{position:absolute;right:150px;bottom:110px;width:380px}
+.emblem{position:absolute;left:50%;top:50%;width:116%;transform:translate(-63.7%,-50%)}
+.logo{position:relative;width:100%;display:block}
+.girder{position:absolute;left:0;right:0;bottom:44px;height:24px;transform:rotate(-.35deg);
+  background:
+    repeating-linear-gradient(90deg,#b8384a 0 14px,transparent 14px 23px) 0 0/100% 8px no-repeat,
+    repeating-linear-gradient(90deg,#b8384a 0 14px,transparent 14px 23px) 11px 16px/100% 8px no-repeat}
+</style></head><body>
+<div class="hud"><div>Estimate<br>75:00</div><div>Season<br>Winter</div><div>Goal<br>10M WON</div></div>
+<div class="left"><img class="ko" src="../assets/title-ko.svg"><div class="date">2027. 01. 21<span>-</span>24</div></div>
+<div class="logo-wrap"><img class="emblem" src="../assets/emblem.svg"><img class="logo" src="../assets/logo.svg"></div>
+<div class="girder"></div>
+</body></html>

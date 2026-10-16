@@ -7,3 +7,6 @@
 - 텍스트는 지어내지 않는다. 기존 superspeedrun.com 문구나 포스터 문구를 그대로 쓴다.
 - 메인 페이지는 `ssm2027/src.html`을 고친 뒤 `ssm2027` 폴더에서 `python3 build.py`를 실행해 `ssm-main-wix.html`을 만든다. 높이가 바뀌면 `README.md`의 Wix 임베드 높이도 갱신한다.
 - 이미지는 jsDelivr CDN(커밋 해시 고정)으로 불러오므로, `assets/`를 바꿨다면 커밋·푸시 후 빌드한다.
+
+## 새 디자인으로 교체할 때
+- 새 행사 디자인이 나오면 `BRANDING-CHECKLIST.md`의 교체 목록(Wix 메인·OG, YouTube 배너·프로필, Discord 배너·초대 배경)을 전부 새로 만든다. 새로 바꾸는 채널이 생기면 그 표에 추가한다.

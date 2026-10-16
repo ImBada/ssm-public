@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:960px;height:540px;background:#000;overflow:hidden}
+body{position:relative;font-family:'Galmuri11';font-weight:700;color:#f2f2ee}
+/* 디스코드 서버 배너: 채널 목록 맨 위에 작게(약 240x135) 표시되고, 왼쪽 위에 서버 이름이 겹쳐 나옴 → 내용은 아래쪽 가운데로 */
+.box{position:absolute;left:0;right:0;top:110px;bottom:40px;display:flex;align-items:center;justify-content:center;gap:44px;padding-left:80px}
+.logo-wrap{position:relative;width:280px;flex:none}
+.emblem{position:absolute;left:50%;top:50%;width:116%;transform:translate(-63.7%,-50%)}
+.logo{position:relative;width:100%;display:block}
+.info{display:flex;flex-direction:column;align-items:flex-start}
+.ko{width:340px;display:block}
+.date{margin-top:20px;font-size:50px;line-height:1;text-shadow:4px 0 0 #eb3728,8px 0 0 #0087c9;white-space:nowrap}
+.date span{display:inline-block;margin:0 .18em}
+</style></head><body>
+<div class="box">
+  <div class="logo-wrap"><img class="emblem" src="../assets/emblem.svg"><img class="logo" src="../assets/logo.svg"></div>
+  <div class="info"><img class="ko" src="../assets/title-ko.svg"><div class="date">2027. 01. 21<span>-</span>24</div></div>
+</div>
+</body></html>

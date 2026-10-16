@@ -4,6 +4,7 @@ superspeedrun.com 메인 페이지를 SSM 2027 포스터 컨셉에 맞춰 새로
 Wix 요금제가 남아 있어서 사이트는 Wix에 그대로 두고, 메인 페이지 본문만 HTML로 만들어 Wix의 **HTML 임베드** 요소에 넣는 방식으로 했다.
 
 디자인 규칙(색상, 폰트, 게임 요소, 이미지 규격)은 [`DESIGN.md`](DESIGN.md)에 정리돼 있다.
+새 디자인 때 함께 바꿔야 하는 채널별 이미지 목록은 [`BRANDING-CHECKLIST.md`](../BRANDING-CHECKLIST.md)에 있다.
 
 ## 파일
 
