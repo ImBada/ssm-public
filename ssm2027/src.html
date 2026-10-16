@@ -31,8 +31,10 @@
 
   /* 히어로 */
   .hero{position:relative;text-align:center;padding:40px 0 110px}
-  .hero .emblem{position:absolute;left:50%;top:0;width:min(720px,100%);transform:translateX(-50%);opacity:.32;pointer-events:none}
-  .hero .logo{position:relative;width:min(620px,88%);margin:0 auto}
+  .hero .logo-wrap{position:relative;width:min(620px,88%);margin:0 auto}
+  /* 엠블럼은 왼쪽 날개 때문에 좌우 비대칭: 꼭지(위아래 뾰족한 끝)가 이미지 너비의 63.7% 지점이라 그 축을 가운데에 맞춤 */
+  .hero .emblem{position:absolute;left:50%;top:50%;width:116%;max-width:none;transform:translate(-63.7%,-50%);pointer-events:none}
+  .hero .logo{position:relative;width:100%}
   .hero .ko{position:relative;width:min(430px,76%);margin:56px auto 0}
   .date{position:relative;margin-top:18px;font-family:var(--h);font-weight:700;font-size:clamp(36px,calc(7.4 * var(--u)),84px);line-height:1;
     text-shadow:3px 0 0 var(--r),6px 0 0 var(--b)}
@@ -122,8 +124,10 @@
   </div>
 
   <section class="hero">
-    <img class="emblem" src="assets/emblem.svg" alt="">
-    <img class="logo" src="assets/logo.svg" alt="SUPER SPEEDRUN MARATHON 2027">
+    <div class="logo-wrap">
+      <img class="emblem" src="assets/emblem.svg" alt="">
+      <img class="logo" src="assets/logo.svg" alt="SUPER SPEEDRUN MARATHON 2027">
+    </div>
     <img class="ko" src="assets/title-ko.svg" alt="슈퍼 스피드런 마라톤 2027">
     <div class="date">2027. 01. 21<span>-</span>24</div>
     <a class="watch" data-href="liveUrl" target="_blank" rel="noopener">방송 보기</a>
